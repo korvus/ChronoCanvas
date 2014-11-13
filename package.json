@@ -1,0 +1,30 @@
+{
+  "name": "ChronoCanvas",
+  "version": "0.0.0",
+  "description": "Allow to display a visual Chronometer in a canvas tag, associate to its ID",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify index.js --outfile --standalone chronoCanvas > chronoCanvas.js",
+    "watch": "watchify index.js --outfile --standalone chronoCanvas > chronoCanvas.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/korvus/ChronoCanvas.git"
+  },
+  "keywords": [
+    "canvas",
+    "node",
+    "vanilla",
+    "javascript"
+  ],
+  "author": "korvus (Simon Ertel)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/korvus/ChronoCanvas/issues"
+  },
+  "homepage": "https://github.com/korvus/ChronoCanvas",
+  "dependencies": {
+    "browserify": "~6.3.2",
+    "watchify": "~2.1.1"
+  }
+}
