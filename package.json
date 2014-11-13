@@ -4,8 +4,8 @@
   "description": "Allow to display a visual Chronometer in a canvas tag, associate to its ID",
   "main": "index.js",
   "scripts": {
-    "build": "browserify index.js --outfile --standalone chronoCanvas > chronoCanvas.js",
-    "watch": "watchify index.js --outfile --standalone chronoCanvas > chronoCanvas.js"
+    "build": "browserify index.js --standalone chronoCanvas --outfile chronoCanvas.js",
+    "watch": "watchify index.js --standalone chronoCanvas --outfile chronoCanvas.js"
   },
   "repository": {
     "type": "git",
