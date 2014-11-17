@@ -1,54 +1,73 @@
 module.exports = function set(params){
 
     var canvasTarget = params.canvasTarget;
-    var color = [], start = [], end = [];
-    var when = 0;
+    var color = [], start = [], end = [], canva = [], ctx = [];
+    var portions = 0.01;
+    var frequency = 10;
     color[0] = "tomato";
     color[1] = "#000";
     start[0] = 0;
     start[1] = 0;
     end[0] = 1;
-    end[1] = 0.25;
-    startC = Math.PI / 2;
-    endC = Math.PI * 2;
+    end[1] = 0;
+    var startC = Math.PI / 2;
+    var endC = Math.PI * 2;
 
     if(params.color1){color[0] = params.color1;}
     if(params.color2){color[1] = params.color2;}
+    if(params.portions){portions = params.portions;}
+    if(params.frequency){frequency = params.frequency;}
     
-    function rate(rate){
-        return ((endC) * rate) - startC;
+    function rate(Paramrate){
+        return ((endC) * Paramrate) - startC;
     }
 
-    this.drawCircle = function(elt){
-        requestAnimationFrame(drawCircle);        
-        centerX = elt.width/2;
-        centerY = elt.height/2;
-        radius  = centerX;
+    function setStockValue(elt, i){
+        ctx[i] = elt.getContext('2d');
+        canva[i] = [];
+        canva[i]["width"] = elt.width;
+        canva[i]["height"] = elt.height;
+        canva[i]["radius"] = elt.height/2;
+    }
+
+    // Loop on each canvas one time for keep each height and width value
+    function stockCoords(allElt){
+        Array.prototype.forEach.call(allElt,setStockValue);
+    }
+
+    function loopElt(allElt){
+        Array.prototype.forEach.call(allElt,drawCircle);
+    }
+
+    function drawCircle(elt, i){
+        ctx[i].clearRect(0, 0, canva[i]["width"], canva[i]["height"]);
+        var centerX = canva[i]["width"]/2;
+        var centerY = canva[i]["height"]/2;
+        var radius = canva[i]["radius"];
+        //0 draw background circle, 1 is the circle of time.
         for(var a=0;a<2;a++){
-            when = end[a]+when;
-            ctx.beginPath();
-            ctx.arc(centerX, centerY, radius, -(startC), rate(end[a]), false);
-            ctx.lineTo(radius,radius);
-            ctx.fillStyle = color[a];
-            ctx.fill();
-            ctx.closePath();
+            if(a==1) end[a] = end[a]+portions;
+            if(end[1]>=1) end[a] = 0;
+            ctx[i].beginPath();
+            ctx[i].arc(centerX, centerY, radius, -(startC), rate(end[a]), false);
+            ctx[i].lineTo(radius,radius);
+            ctx[i].fillStyle = color[a];
+            ctx[i].fill();
+            ctx[i].closePath();
         }
-        when = when+(1/100);
-        startTimer(elt);
-        clear(timer);
     }
 
-    function startTimer(elt){
-        console.log("Ce qui est passé en param :"+elt);
-        timer = setTimeout(function(){this.drawCircle(elt);}, 20000);
+    function startTimer(allElt){
+        var timer = setInterval(function(){loopElt(allElt);}, frequency);
     }
 
     window.onload = function(){
-        var elt = document.querySelectorAll(canvasTarget);
-        if(elt.length>0){
-            Array.prototype.forEach.call(elt,startTimer);
+        var allElt = document.querySelectorAll(canvasTarget);
+        if(allElt.length>0){
+            stockCoords(allElt);
+            loopElt(allElt);//Initialisation
+            startTimer(allElt);
         }
-    }
+    };
 
 };
-
