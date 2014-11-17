@@ -2,8 +2,11 @@ module.exports = function set(params){
 
     var canvasTarget = params.canvasTarget;
     var color = [], start = [], end = [], canva = [], ctx = [];
-    var portions = 0.01;
+    var portions = 0.001;
     var frequency = 10;
+    var iteration = 4;
+    var nbrTurn = 0;
+    var timer = "";
     color[0] = "tomato";
     color[1] = "#000";
     start[0] = 0;
@@ -17,6 +20,7 @@ module.exports = function set(params){
     if(params.color2){color[1] = params.color2;}
     if(params.portions){portions = params.portions;}
     if(params.frequency){frequency = params.frequency;}
+    if(params.iteration){iteration = params.iteration;}
     
     function rate(Paramrate){
         return ((endC) * Paramrate) - startC;
@@ -47,10 +51,23 @@ module.exports = function set(params){
         //0 draw background circle, 1 is the circle of time.
         for(var a=0;a<2;a++){
             if(a==1) end[a] = end[a]+portions;
-            if(end[1]>=1) end[a] = 0;
+            if(end[1]>=1){
+                nbrTurn++;
+                if(nbrTurn==iteration){
+                    window.clearTimeout(timer);
+                }else{
+                    end[a] = 0;
+                }
+            }
             ctx[i].beginPath();
             ctx[i].arc(centerX, centerY, radius, -(startC), rate(end[a]), false);
-            ctx[i].lineTo(radius,radius);
+            if(a==0){
+                ctx[i].lineTo(radius,radius);
+            }
+            if(a==1){
+                ctx[i].stroke();
+                ctx[i].strokeStyle = 'black';
+            }
             ctx[i].fillStyle = color[a];
             ctx[i].fill();
             ctx[i].closePath();
@@ -58,7 +75,7 @@ module.exports = function set(params){
     }
 
     function startTimer(allElt){
-        var timer = setInterval(function(){loopElt(allElt);}, frequency);
+        timer = setInterval(function(){loopElt(allElt);}, frequency);
     }
 
     window.onload = function(){
