@@ -8,9 +8,17 @@
   <script>
 
     chronoCanvas({
-      canvasTarget: ".chronometer",
-      color1: "#000",
-      color2: "tomato"
+      canvasTarget: ".chronometer1",
+      behind: "black",
+      ahead: "stroke 30 tomato",
+      iteration: 10
+    });
+
+    chronoCanvas({
+      canvasTarget: ".chronometer2",
+      behind: "blue",
+      ahead: "fill tomato",
+      iteration: 10
     });
 
   </script>
@@ -26,8 +34,8 @@
 <body>
   <section>
 
-      <canvas width="100" height="100" class="chronometer"></canvas>
-      <canvas width="150" height="150"></canvas>
+      <canvas width="100" height="100" class="chronometer1"></canvas>
+      <canvas width="150" height="150" class="chronometer2"></canvas>
       <canvas width="150" height="150"></canvas>
 
   </section>
