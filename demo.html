@@ -7,19 +7,25 @@
   <script type="text/javascript" src="chronoCanvas.js"></script>
   <script>
 
-    chronoCanvas({
-      canvasTarget: ".chronometer1",
-      behind: "black",
-      ahead: "stroke 30 tomato",
-      iteration: 10
-    });
+    window.onload = function(){
 
-    chronoCanvas({
-      canvasTarget: ".chronometer2",
-      behind: "blue",
-      ahead: "fill tomato",
-      iteration: 10
-    });
+        chronoCanvas({
+          canvasTarget: ".chronometer1",
+          behind: "black",
+          ahead: "stroke 30 tomato",
+          iteration: 2
+        });
+
+        chronoCanvas({
+          canvasTarget: ".chronometer2",
+          behind: "blue",
+          ahead: "fill tomato",
+          iteration: 1.6,
+          portions: 0.0166,
+          frequency: 1000
+        });
+
+    }
 
   </script>
   <style>

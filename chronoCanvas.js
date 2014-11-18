@@ -5,7 +5,7 @@ module.exports = function set(params){
     var color = [], start = [], end = [], canva = [], ctx = [];
     var portions = 0.001;
     var frequency = 10;
-    var iteration = 4;
+    var iteration = 0;
     var nbrTurn = 0;
     var timer = "";
     var visual = "fill MidnightBlue";
@@ -64,7 +64,19 @@ module.exports = function set(params){
         return Math.round(rad - semiBorder);
     }
 
+    function manageTurns(){
+        if(end[1]>=1){
+            nbrTurn = iteration===0 ? 0 : nbrTurn+ 1;
+            if(nbrTurn==iteration){
+                window.clearTimeout(timer);
+            }else{
+                end[1] = 0;
+            }
+        }
+    }
+
     function drawPie(i, centerX, centerY, radius){
+        manageTurns();
         var visuParams = parseVisualParam();
         var type = (visuParams[0] === "fill") ? "fill" : "stroke";
         var colorPie = (type === "fill") ? visuParams[1] : visuParams[2];
@@ -92,7 +104,6 @@ module.exports = function set(params){
         var centerY = canva[i].height/2;
         var radius = canva[i].radius;
         //0 draw background circle, 1 is the circle of time.
-        nbrTurn++;
         drawBackground(i,centerX,centerY,radius);
         drawPie(i,centerX,centerY,radius);
     }
@@ -101,15 +112,14 @@ module.exports = function set(params){
         timer = setInterval(function(){loopElt(allElt);}, frequency);
     }
 
-    window.onload = function(){
-        var allElt = document.querySelectorAll(canvasTarget);
-        if(allElt.length>0){
-            stockCoords(allElt);
-            loopElt(allElt);//Initialisation
-            startTimer(allElt);
-        }
-    };
+    var allElt = document.querySelectorAll(canvasTarget);
+    if(allElt.length>0){
+        stockCoords(allElt);
+        loopElt(allElt);//Initialisation
+        startTimer(allElt);
+    }
 
 };
+
 },{}]},{},["/home/sertel/projects/tools/ChronoCanvas/index.js"])("/home/sertel/projects/tools/ChronoCanvas/index.js")
 });
