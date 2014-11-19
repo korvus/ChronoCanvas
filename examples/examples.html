@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Test</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" id="favicon">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="assets/css/g.css">
+  <link rel="stylesheet" href="assets/css/default.css">
+  <script type="text/javascript" src="assets/js/highlight.js"></script>
+  <script type="text/javascript" src="../chronoCanvas.js"></script>
+  <script>
+
+
+    window.onload = function(){
+
+      hljs.initHighlightingOnLoad();
+/*
+      chronoCanvas({
+        canvasTarget: ".chronometer1"
+      });
+
+      chronoCanvas({
+        canvasTarget: ".chronometer2",
+        portions: 0.0166,
+        frequency: 1000
+      });
+*/
+      chronoCanvas({
+        canvasTarget: ".chronometer3",
+        iteration: 0,
+        portions: 0.01,
+        frequency: 100
+      });
+/*
+      chronoCanvas({
+        canvasTarget: ".chronometer4",
+        iteration: 1,
+        portions: 0.01,
+        frequency: 100
+      });
+*/
+
+    }
+
+  </script>
+</head>
+<body>
+  <section>
+    <ul>
+      <li>
+        <canvas width="150" height="150" class="chronometer1"></canvas>
+        <h2>Basic use</h2>
+        <p>
+          Basic use 
+        </p>
+        <pre><code class="javascript">window.onload = function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer1"
+  });
+}</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer2"></canvas>
+<pre><code class="javascript">window.onload = function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer2",
+    portions: 0.0166,
+    frequency: 1000
+  });
+}</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer3"></canvas>
+<pre><code class="javascript">window.onload = function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer3",
+    iteration: 0,
+    portions: 0.01,
+    frequency: 100
+  });
+}</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer4"></canvas>
+<pre><code class="javascript">window.onload = function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer4",
+    iteration: 1,
+    portions: 0.01,
+    frequency: 100
+  });
+}</code></pre>
+      </li>
+    </ul>
+  </section>
+</body>
+</html>

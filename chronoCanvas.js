@@ -1,11 +1,20 @@
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;"undefined"!=typeof window?n=window:"undefined"!=typeof global?n=global:"undefined"!=typeof self&&(n=self),n.chronoCanvas=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/sertel/projects/tools/ChronoCanvas/index.js":[function(require,module,exports){
 module.exports = function set(params){
 
+/*
+ * canvasTarget : DOM Canvas targeted
+ * portions : part of avancement for each refresh
+ * frequency : frequency of refreshing of the canvas in milliseconds
+ * iteration : number of full turns
+ * behing : receive color for parameter 
+ * ahead : set of parameters for pie
+*/
+
     var canvasTarget = params.canvasTarget;
     var color = [], start = [], end = [], canva = [], ctx = [];
     var portions = 0.001;
-    var frequency = 10;
-    var iteration = 0;
+    var frequency = 62.5;
+    var iteration = 1;
     var nbrTurn = 0;
     var timer = "";
     var visual = "fill MidnightBlue";
@@ -18,12 +27,12 @@ module.exports = function set(params){
     var startC = Math.PI / 2;
     var endC = Math.PI * 2;
 
-    if(params.behind){color[0] = params.behind;}
-    if(params.portions){portions = params.portions;}
-    if(params.frequency){frequency = params.frequency;}
-    if(params.iteration){iteration = params.iteration;}
-    if(params.behind){color[1] = params.behind;}
-    if(params.ahead){visual = params.ahead;}
+    if(params.behind!=null){color[0] = params.behind;}
+    if(params.portions!=null){portions = params.portions;}
+    if(params.frequency!=null){frequency = params.frequency;}
+    if(params.iteration!=null){iteration = params.iteration;}
+    if(params.behind!=null){color[1] = params.behind;}
+    if(params.ahead!=null){visual = params.ahead;}
     
     function rate(Paramrate){
         return ((endC) * Paramrate) - startC;
@@ -65,10 +74,15 @@ module.exports = function set(params){
     }
 
     function manageTurns(){
+        console.log(iteration);
         if(end[1]>=1){
-            nbrTurn = iteration===0 ? 0 : nbrTurn+ 1;
+            nbrTurn++;
             if(nbrTurn==iteration){
-                window.clearTimeout(timer);
+                if(iteration!==0){
+                    window.clearTimeout(timer);
+                }else{
+                    end[1] = 0;
+                }
             }else{
                 end[1] = 0;
             }

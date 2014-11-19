@@ -1,0 +1,6 @@
+{
+	"name": "example",
+	"devDependencies": {
+		"highlight.js": "~8.4.0"
+	}
+}

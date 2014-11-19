@@ -1,0 +1,20 @@
+html{padding:0;margin:0;font-family:"Montserrat", Arial, sans-serif;}
+
+
+ul{width:990px;margin:0 auto;}
+li{
+	padding:10px 0;
+	display:block;
+	clear:both;
+	list-style:none;
+	overflow:hidden;
+}
+
+pre{margin:0;border-top:1px solid #ddd;margin-left:160px;}
+h2{font-weight:normal;padding:0;margin:0;}
+
+canvas{
+  float:left;
+  margin:0 10px 0 0;
+  border:1px dotted #555;
+}
