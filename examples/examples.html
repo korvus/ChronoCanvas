@@ -12,7 +12,11 @@
 
     hljs.initHighlightingOnLoad();
 
-    window.onload = function(){
+    function thiscallback(){
+      alert("end of turns!");
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
 
       chronoCanvas({
         canvasTarget: ".chronometer1"
@@ -26,19 +30,45 @@
 
       chronoCanvas({
         canvasTarget: ".chronometer3",
-        iteration: 0,
-        portions: 80,
-        frequency: 100
+        frequency: 1,
+        iteration: 0
+      });
+
+      document.getElementById('myButton').addEventListener("click", 
+        function(){
+          chronoCanvas({
+            canvasTarget: ".chronometer4",
+            iteration: 2,
+            portions: 8,
+            frequency: 500,
+            outputEnd: thiscallback
+          });
+        }
+      ,false);
+
+      chronoCanvas({
+        canvasTarget: ".chronometer5",
+        ahead: "fill red",
+        frequency: 10,
+        iteration: 0
       });
 
       chronoCanvas({
-        canvasTarget: ".chronometer4",
-        iteration: 1,
-        portions: 80,
-        frequency: 100
+        canvasTarget: ".chronometer6",
+        ahead: "stroke 30 tomato",
+        frequency: 10,
+        iteration: 0
       });
 
-    }
+      chronoCanvas({
+        canvasTarget: ".chronometer7",
+        behind: "stroke 30 #666",
+        ahead: "stroke 30 #FF6347",
+        frequency: 10,
+        iteration: 0
+      });
+
+    });
 
   </script>
 </head>
@@ -52,50 +82,115 @@
           In native javascript: In the event handler of your choice, 
           call chronoCanvas, and use the <strong>canvasTarget</strong> parameter for target the canvas node. It will use the <i>querySelectorAll</i> function.
         </p>
-        <pre><code class="hljs js">window.onload = function(){
+        <pre><code class="hljs js">document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer1"
   });
-}</code></pre>
+})</code></pre>
       </li>
       <li>
         <canvas width="150" height="150" class="chronometer2"></canvas>
         <h2>speed and twitch</h2>
         <p>
-          <strong>Portions</strong> parameter is the distance traveled between each canvas refresh. It's a numeric value between <strong>0</strong> and <strong>1</strong>. If you set to 0.5, there will be only two move for a full turn. If 0.25, 4 moves. If you want one move for one second like on a watch, calculate it this way: 1/60 = 0.166666 (the number after point you want), like here.<br />
-          <strong>Frequency</strong> time in milisecond between each canvas refreshing.
-          In this example, you got 1 second between each move. Then, the full turn take 1 minut, as the circle is divided in 60 portions.
+          <strong>Portions</strong> parameter is how many parts is split your pie chart. By default, set to 600.<br />
+          <strong>Frequency</strong> time in milisecond is the interval when canvas is refreshing. By default set to 100.
+          In this example, you got 1 second between each refreshing. Then, the full turn take 1 minut, as the circle is divided in 60 portions. Compare to previous example with default values to see how it take finaly the same time, but how animation is different because of the interval and the portions.
         </p>
-        <h2></h2>
-<pre><code class="javascript">window.onload = function(){
+<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer2",
     portions: 60,
     frequency: 1000
   });
-}</code></pre>
+})</code></pre>
       </li>
       <li>
         <canvas width="150" height="150" class="chronometer3"></canvas>
-<pre><code class="javascript">window.onload = function(){
+        <h2>Number of turns</h2>
+        <p>
+          <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
+        </p>
+<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer3",
-    iteration: 0,
-    portions: 80,
-    frequency: 100
+    frequency: 1,
+    iteration: 0
   });
-}</code></pre>
+})</code></pre>
       </li>
       <li>
         <canvas width="150" height="150" class="chronometer4"></canvas>
-<pre><code class="javascript">window.onload = function(){
+        <button id="myButton">Click for launch</button>
+        <h2>Callback when finish</h2>
+        <p>
+          <strong>outputEnd</strong> parameter allow you to launch a function at end of all the cycles you defined. See in example how the chronoCanvas is launch by a button, and launch an alert when all iterations are over.
+        </p>
+<pre><code class="javascript">function thiscallback(){
+  alert("end of turns!");
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  document.getElementById('myButton').addEventListener("click", 
+    function(){
+      chronoCanvas({
+        canvasTarget: ".chronometer4",
+        iteration: 2,
+        portions: 8,
+        frequency: 500,
+        outputEnd: thiscallback
+      });
+    }
+  ,false);
+
+})</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer5"></canvas>
+        <h2>Colors!</h2>
+        <p>
+          <strong>ahead</strong> parameter receive a string with list of keywords, separated by simple spaces. The first keyword is unavoidably "stroke" or "fill". Stroke draw like a border, fill make the circle plain. If you choose "fill" parameter, you will have another parameter, the color. Can be hexadecimal or <a target="_blank" title="HTML color name" href="http://www.html-color-names.com/color-chart.php">HTML color name</a>
+        </p>
+<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
-    canvasTarget: ".chronometer4",
-    iteration: 1,
-    portions: 80,
-    frequency: 100
+    canvasTarget: ".chronometer5",
+    ahead: "fill red",
+    frequency: 10,
+    iteration: 0
   });
-}</code></pre>
+})</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer6"></canvas>
+        <h2>Border/Stroke!</h2>
+        <p>
+          If you choose stroke, you will have to add an another parameter, a number, before color, for designating the  
+          thickness of the border.
+        </p>
+<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer6",
+    ahead: "stroke 30 tomato",
+    frequency: 10,
+    iteration: 0
+  });
+})</code></pre>
+      </li>
+      <li>
+        <canvas width="150" height="150" class="chronometer7"></canvas>
+        <h2>Colors!</h2>
+        <p>
+          <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
+        </p>
+<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+  chronoCanvas({
+    canvasTarget: ".chronometer7",
+    behind: "stroke 30 #666",
+    ahead: "stroke 30 #FF6347",
+    frequency: 10,
+    iteration: 0
+  });
+})</code></pre>
       </li>
     </ul>
   </section>

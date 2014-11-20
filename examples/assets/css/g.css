@@ -9,6 +9,7 @@ li{
 	overflow:hidden;
 }
 
+button{float:left;clear:left;margin:10px 0 0 18px;}
 pre{margin:0;margin-left:160px;}
 h2{font-weight:normal;padding:0;margin:0;font-size:16px;font-family:"Montserrat", Arial, sans-serif;}
 p{font-size:14px;}

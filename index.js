@@ -16,7 +16,9 @@ module.exports = function set(params){
     var iteration = 1;
     var nbrTurn = 0;
     var timer = "";
+    var outputEnd = 0;
     var visual = "fill MidnightBlue";
+    var visualBg = "fill transparent";
     color[0] = "transparent";
     color[1] = "#000";
     start[0] = 0;
@@ -26,12 +28,12 @@ module.exports = function set(params){
     var startC = Math.PI / 2;
     var endC = Math.PI * 2;
 
-    if(params.behind!=null){color[0] = params.behind;}
+    if(params.behind!=null){visualBg = params.behind;}
+    if(params.ahead!=null){visual = params.ahead;}
     if(params.portions!=null){portions = params.portions;}
     if(params.frequency!=null){frequency = params.frequency;}
     if(params.iteration!=null){iteration = params.iteration;}
-    if(params.behind!=null){color[1] = params.behind;}
-    if(params.ahead!=null){visual = params.ahead;}
+    if(params.outputEnd){outputEnd = params.outputEnd;}
     
     //Reverse portions frequency
     portions = 1/portions;
@@ -57,17 +59,33 @@ module.exports = function set(params){
         Array.prototype.forEach.call(allElt,drawCircle);
     }
 
-    function drawBackground(i, centerX, centerY, radius){
+    function initElt(allElt){
+        Array.prototype.forEach.call(allElt,initEach);
+    }
+
+    function drawBackground(i, centerX, centerY, radiusBG){
+        var visuParamsBG = parseVisualParam(visualBg);
+        var typeBG = (visuParamsBG[0] === "fill") ? "fill" : "stroke";
+        var colorBg = (typeBG === "fill") ? visuParamsBG[1] : visuParamsBG[2];
+        if(typeBG === "stroke"){
+            radiusBG = reCalculateRadius(radiusBG, visuParamsBG[1]);
+        }
         ctx[i].beginPath();
-        ctx[i].arc(centerX, centerY, radius, -(startC), rate(end[0]), false);
-        ctx[i].lineTo(radius,radius);
-        ctx[i].fillStyle = color[0];
-        ctx[i].fill();
+        ctx[i].arc(centerX, centerY, radiusBG, -(startC), rate(end[0]), false);
+        if(typeBG == "fill"){
+            ctx[i].lineTo(radiusBG,radiusBG);
+            ctx[i].fillStyle = colorBg;
+            ctx[i].fill();
+        }else{
+            ctx[i].lineWidth = visuParamsBG[1];
+            ctx[i].strokeStyle = colorBg;
+            ctx[i].stroke();
+        }
         ctx[i].closePath();
     }
 
-    function parseVisualParam(){
-        return visual.split(" ");
+    function parseVisualParam(params){
+        return params.split(" ");
     }
 
     function reCalculateRadius(rad, sizeB){
@@ -75,12 +93,16 @@ module.exports = function set(params){
         return Math.round(rad - semiBorder);
     }
 
+    /*
+    * CONDITION IF CYCLE TERMINATE
+    */
     function manageTurns(){
         if(end[1]>=1){
             nbrTurn++;
             if(nbrTurn==iteration){
                 if(iteration!==0){
                     window.clearTimeout(timer);
+                    if(outputEnd){outputEnd();}
                 }else{
                     end[1] = 0;
                 }
@@ -91,14 +113,14 @@ module.exports = function set(params){
     }
 
     function drawPie(i, centerX, centerY, radius){
+        end[1] = end[1]+portions;
         manageTurns();
-        var visuParams = parseVisualParam();
+        var visuParams = parseVisualParam(visual);
         var type = (visuParams[0] === "fill") ? "fill" : "stroke";
         var colorPie = (type === "fill") ? visuParams[1] : visuParams[2];
         if(type === "stroke"){
             radius = reCalculateRadius(radius, visuParams[1]);
         }
-        end[1] = end[1]+portions;
         ctx[i].beginPath();
         ctx[i].arc(centerX, centerY, radius, -(startC), rate(end[1]), false);
         if(type=="fill"){
@@ -106,9 +128,9 @@ module.exports = function set(params){
             ctx[i].fillStyle = colorPie;
             ctx[i].fill();
         }else{
-            ctx[i].stroke();
             ctx[i].lineWidth = visuParams[1];
             ctx[i].strokeStyle = colorPie;
+            ctx[i].stroke();
         }
         ctx[i].closePath();
     }
@@ -123,6 +145,13 @@ module.exports = function set(params){
         drawPie(i,centerX,centerY,radius);
     }
 
+    function initEach(elt, i){
+        var centerX = canva[i].width/2;
+        var centerY = canva[i].height/2;
+        var radius = canva[i].radius;
+        drawBackground(i,centerX,centerY,radius);
+    }
+
     function startTimer(allElt){
         timer = setInterval(function(){loopElt(allElt);}, frequency);
     }
@@ -130,7 +159,7 @@ module.exports = function set(params){
     var allElt = document.querySelectorAll(canvasTarget);
     if(allElt.length>0){
         stockCoords(allElt);
-        loopElt(allElt);//Initialisation
+        initElt(allElt);//Initialisation
         startTimer(allElt);
     }
 
