@@ -11,8 +11,8 @@ module.exports = function set(params){
 
     var canvasTarget = params.canvasTarget;
     var color = [], start = [], end = [], canva = [], ctx = [];
-    var portions = 0.001;
-    var frequency = 62.5;
+    var portions = 600;
+    var frequency = 100;
     var iteration = 1;
     var nbrTurn = 0;
     var timer = "";
@@ -33,6 +33,9 @@ module.exports = function set(params){
     if(params.behind!=null){color[1] = params.behind;}
     if(params.ahead!=null){visual = params.ahead;}
     
+    //Reverse portions frequency
+    portions = 1/portions;
+
     function rate(Paramrate){
         return ((endC) * Paramrate) - startC;
     }
@@ -73,7 +76,6 @@ module.exports = function set(params){
     }
 
     function manageTurns(){
-        console.log(iteration);
         if(end[1]>=1){
             nbrTurn++;
             if(nbrTurn==iteration){

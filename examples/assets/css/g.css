@@ -1,17 +1,17 @@
-html{padding:0;margin:0;font-family:"Montserrat", Arial, sans-serif;}
-
+html{padding:0;margin:0;font-family:Arial, Helvetica, sans-serif;}
 
 ul{width:990px;margin:0 auto;}
 li{
-	padding:10px 0;
+	padding:10px 0 50px;
 	display:block;
 	clear:both;
 	list-style:none;
 	overflow:hidden;
 }
 
-pre{margin:0;border-top:1px solid #ddd;margin-left:160px;}
-h2{font-weight:normal;padding:0;margin:0;}
+pre{margin:0;margin-left:160px;}
+h2{font-weight:normal;padding:0;margin:0;font-size:16px;font-family:"Montserrat", Arial, sans-serif;}
+p{font-size:14px;}
 
 canvas{
   float:left;

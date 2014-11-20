@@ -5,40 +5,38 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" id="favicon">
   <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="assets/css/g.css">
-  <link rel="stylesheet" href="assets/css/default.css">
+  <link rel="stylesheet" href="assets/css/github.css">
   <script type="text/javascript" src="assets/js/highlight.js"></script>
   <script type="text/javascript" src="../chronoCanvas.js"></script>
   <script>
 
+    hljs.initHighlightingOnLoad();
 
     window.onload = function(){
 
-      hljs.initHighlightingOnLoad();
-/*
       chronoCanvas({
         canvasTarget: ".chronometer1"
       });
 
       chronoCanvas({
         canvasTarget: ".chronometer2",
-        portions: 0.0166,
+        portions: 60,
         frequency: 1000
       });
-*/
+
       chronoCanvas({
         canvasTarget: ".chronometer3",
         iteration: 0,
-        portions: 0.01,
+        portions: 80,
         frequency: 100
       });
-/*
+
       chronoCanvas({
         canvasTarget: ".chronometer4",
         iteration: 1,
-        portions: 0.01,
+        portions: 80,
         frequency: 100
       });
-*/
 
     }
 
@@ -51,9 +49,10 @@
         <canvas width="150" height="150" class="chronometer1"></canvas>
         <h2>Basic use</h2>
         <p>
-          Basic use 
+          In native javascript: In the event handler of your choice, 
+          call chronoCanvas, and use the <strong>canvasTarget</strong> parameter for target the canvas node. It will use the <i>querySelectorAll</i> function.
         </p>
-        <pre><code class="javascript">window.onload = function(){
+        <pre><code class="hljs js">window.onload = function(){
   chronoCanvas({
     canvasTarget: ".chronometer1"
   });
@@ -61,10 +60,17 @@
       </li>
       <li>
         <canvas width="150" height="150" class="chronometer2"></canvas>
+        <h2>speed and twitch</h2>
+        <p>
+          <strong>Portions</strong> parameter is the distance traveled between each canvas refresh. It's a numeric value between <strong>0</strong> and <strong>1</strong>. If you set to 0.5, there will be only two move for a full turn. If 0.25, 4 moves. If you want one move for one second like on a watch, calculate it this way: 1/60 = 0.166666 (the number after point you want), like here.<br />
+          <strong>Frequency</strong> time in milisecond between each canvas refreshing.
+          In this example, you got 1 second between each move. Then, the full turn take 1 minut, as the circle is divided in 60 portions.
+        </p>
+        <h2></h2>
 <pre><code class="javascript">window.onload = function(){
   chronoCanvas({
     canvasTarget: ".chronometer2",
-    portions: 0.0166,
+    portions: 60,
     frequency: 1000
   });
 }</code></pre>
@@ -75,7 +81,7 @@
   chronoCanvas({
     canvasTarget: ".chronometer3",
     iteration: 0,
-    portions: 0.01,
+    portions: 80,
     frequency: 100
   });
 }</code></pre>
@@ -86,7 +92,7 @@
   chronoCanvas({
     canvasTarget: ".chronometer4",
     iteration: 1,
-    portions: 0.01,
+    portions: 80,
     frequency: 100
   });
 }</code></pre>
