@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="assets/css/github.css">
   <script type="text/javascript" src="assets/js/highlight.js"></script>
   <script type="text/javascript" src="chronoCanvas-commonJS-bundle.js"></script>
-  <script type="text/javascript" src="../chronoCanvas.js"></script>
   <script>
 
     hljs.initHighlightingOnLoad();
@@ -39,7 +38,9 @@
           <strong>Frequency</strong> time in milisecond is the interval when canvas is refreshing. By default set to 100.
           In this example, you got 1 second between each refreshing. Then, the full turn take 1 minut, as the circle is divided in 60 portions. Compare to previous example with default values to see how it take finaly the same time, but how animation is different because of the interval and the portions.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer2",
     portions: 60,
@@ -53,7 +54,9 @@
         <p>
           <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer3",
     frequency: 1,
@@ -68,7 +71,9 @@
         <p>
           <strong>outputEnd</strong> parameter allow you to launch a function at end of all the cycles you defined. See in example how the chronoCanvas is launch by a button, and launch an alert when all iterations are over.
         </p>
-<pre><code class="javascript">function thiscallback(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+function thiscallback(){
   alert("end of turns!");
 }
 
@@ -94,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function(){
         <p>
           <strong>ahead</strong> parameter receive a string with list of keywords, separated by simple spaces. The first keyword is unavoidably "stroke" or "fill". Stroke draw like a border, fill make the circle plain. If you choose "fill" parameter, you will have another parameter, the color. Can be hexadecimal or <a target="_blank" title="HTML color name" href="http://www.html-color-names.com/color-chart.php">HTML color name</a>
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer5",
     ahead: "fill red",
@@ -110,7 +117,9 @@ document.addEventListener('DOMContentLoaded', function(){
           If you choose stroke, you will have to add an another parameter, a number, before color, for designating the  
           thickness of the border.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer6",
     ahead: "stroke 30 tomato",
@@ -125,7 +134,9 @@ document.addEventListener('DOMContentLoaded', function(){
         <p>
           <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer7",
     behind: "stroke 30 #666",

@@ -1,13 +1,63 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/sertel/projects/tools/ChronoCanvas/examples/chronoCanvas-commonJS.js":[function(require,module,exports){
 var chronoCanvas = require('../');
 
-(function(){
+function thiscallback(){
+  alert("end of turns!");
+}
 
-	chronoCanvas({
-		canvasTarget: ".chronometer1"
-	});
+document.addEventListener('DOMContentLoaded', function(){
 
-}())
+  chronoCanvas({
+    canvasTarget: ".chronometer1"
+  });
+
+  chronoCanvas({
+    canvasTarget: ".chronometer2",
+    portions: 60,
+    frequency: 1000
+  });
+
+  chronoCanvas({
+    canvasTarget: ".chronometer3",
+    frequency: 1,
+    iteration: 0
+  });
+
+  document.getElementById('myButton').addEventListener("click", 
+    function(){
+      chronoCanvas({
+        canvasTarget: ".chronometer4",
+        iteration: 2,
+        portions: 8,
+        frequency: 500,
+        outputEnd: thiscallback
+      });
+    }
+  ,false);
+
+  chronoCanvas({
+    canvasTarget: ".chronometer5",
+    ahead: "fill red",
+    frequency: 10,
+    iteration: 0
+  });
+
+  chronoCanvas({
+    canvasTarget: ".chronometer6",
+    ahead: "stroke 30 tomato",
+    frequency: 10,
+    iteration: 0
+  });
+
+  chronoCanvas({
+    canvasTarget: ".chronometer7",
+    behind: "stroke 30 #666",
+    ahead: "stroke 30 #FF6347",
+    frequency: 10,
+    iteration: 0
+  });
+
+});
 
 },{"../":"/home/sertel/projects/tools/ChronoCanvas/index.js"}],"/home/sertel/projects/tools/ChronoCanvas/index.js":[function(require,module,exports){
 module.exports = function set(params){

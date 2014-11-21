@@ -24,18 +24,27 @@
         <h2><a title="see how install it with common js" href="examplesCommonJs.html">CommonJs</a></h2>
         <p>
           You have to :
-          - Install the package in your project
-          - require it in a js file
-          - compile it with the tool of your choice in an output file for your browser
-          - include it in your page
+          - Install the package in your project (command line)
         </p>
 <pre><code class="shell">
   npm install chronoCanvas
 </code></pre>
-
+        <p>
+          - require it in a js file
+        </p>
 <pre><code class="javascript">
   var chronoCanvas = require('chronoCanvas');
 </code></pre>
+        <p>
+          - execute your commonJS task with the module system manager of your choice (here with browserify in example) in command line
+        </p>
+<pre><code class="shell">
+  browserify dev/foo.js --outfile prod/bar.js
+</code></pre>
+        <p>
+          - include it your front page the output file
+        </p>
+
 
 <pre><code class="shell">
   
