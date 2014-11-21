@@ -5,11 +5,11 @@ ChronoCanvas is a simple visual chronometer using canvas tag.
 ##How to use
   - Call JavaScript.
   - Create a canvas tag with equal width and height.
-  - Configure chronoCanvas occurence with parameters.s
+  - Configure chronoCanvas occurence with parameters.
 
 Html
 
-Header :
+Call the plugin :
 ```html
 <script type="text/javascript" src="chronoCanvas.js"></script>
 ```
@@ -18,7 +18,7 @@ Canvas :
 <canvas width="150" height="150" class="chronometer1"></canvas>
 ```
 
-Javascript
+In your javascript
 ```Javascript
 document.addEventListener('DOMContentLoaded', function(){
 
@@ -39,7 +39,7 @@ Will give:
 
 ### Tech
 
-* [browserify] - HTML enhanced for web apps!
+* Javascript
 
 
 
