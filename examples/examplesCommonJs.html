@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -24,7 +25,9 @@
           In native javascript: In the event handler of your choice, 
           call chronoCanvas, and use the <strong>canvasTarget</strong> parameter for target the canvas node. It will use the <i>querySelectorAll</i> function.
         </p>
-        <pre><code class="hljs js">document.addEventListener('DOMContentLoaded', function(){
+        <pre><code class="hljs js">var chronoCanvas = require('chronoCanvas');
+
+document.addEventListener('DOMContentLoaded', function(){
   chronoCanvas({
     canvasTarget: ".chronometer1"
   });
@@ -114,8 +117,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <canvas width="150" height="150" class="chronometer6"></canvas>
         <h2>Border/Stroke!</h2>
         <p>
-          If you choose stroke, you will have to add an another parameter, a number, before color, for designating the  
-          thickness of the border.
+          If you choose stroke, you will have to add an another parameter, a number, before color, for designating the border thickness.
         </p>
 <pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
 
@@ -132,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <canvas width="150" height="150" class="chronometer7"></canvas>
         <h2>Colors!</h2>
         <p>
-          <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
+          In the same way as ahead, there is <strong>behind</strong> parameter, giving you the abilities to skinn the background! And, of course, never forget you can use any svg or pic in css background of a canvas!
         </p>
 <pre><code class="javascript">var chronoCanvas = require('chronoCanvas');
 

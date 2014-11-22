@@ -1,4 +1,4 @@
-var chronoCanvas = require('../');
+var chronoCanvas = require('../index.js');
 
 function thiscallback(){
   alert("end of turns!");

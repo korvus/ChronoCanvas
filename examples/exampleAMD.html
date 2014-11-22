@@ -7,69 +7,10 @@
   <link rel="stylesheet" href="assets/css/g.css">
   <link rel="stylesheet" href="assets/css/github.css">
   <script type="text/javascript" src="assets/js/highlight.js"></script>
-  <script type="text/javascript" src="../chronoCanvas.js"></script>
+  <script type="text/javascript" src="requireJs.js"></script>
+  <script type="text/javascript" src="chronoCanvas-AMD.js"></script>
   <script>
-
     hljs.initHighlightingOnLoad();
-
-    function thiscallback(){
-      alert("end of turns!");
-    }
-
-    document.addEventListener('DOMContentLoaded', function(){
-
-      chronoCanvas({
-        canvasTarget: ".chronometer1"
-      });
-
-      chronoCanvas({
-        canvasTarget: ".chronometer2",
-        portions: 60,
-        frequency: 1000
-      });
-
-      chronoCanvas({
-        canvasTarget: ".chronometer3",
-        frequency: 1,
-        iteration: 0
-      });
-
-      document.getElementById('myButton').addEventListener("click", 
-        function(){
-          chronoCanvas({
-            canvasTarget: ".chronometer4",
-            iteration: 2,
-            portions: 8,
-            frequency: 500,
-            outputEnd: thiscallback
-          });
-        }
-      ,false);
-
-      chronoCanvas({
-        canvasTarget: ".chronometer5",
-        ahead: "fill red",
-        frequency: 10,
-        iteration: 0
-      });
-
-      chronoCanvas({
-        canvasTarget: ".chronometer6",
-        ahead: "stroke 30 tomato",
-        frequency: 10,
-        iteration: 0
-      });
-
-      chronoCanvas({
-        canvasTarget: ".chronometer7",
-        behind: "stroke 30 #666",
-        ahead: "stroke 30 #FF6347",
-        frequency: 10,
-        iteration: 0
-      });
-
-    });
-
   </script>
 </head>
 <body>
@@ -96,7 +37,7 @@
           <strong>Frequency</strong> time in milisecond is the interval when canvas is refreshing. By default set to 100.
           In this example, you got 1 second between each refreshing. Then, the full turn take 1 minut, as the circle is divided in 60 portions. Compare to previous example with default values to see how it take finaly the same time, but how animation is different because of the interval and the portions.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">require(['chronoCanvas'], function(chronoCanvas){
   chronoCanvas({
     canvasTarget: ".chronometer2",
     portions: 60,
@@ -110,7 +51,7 @@
         <p>
           <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">require(['chronoCanvas'], function(chronoCanvas){
   chronoCanvas({
     canvasTarget: ".chronometer3",
     frequency: 1,
@@ -129,7 +70,7 @@
   alert("end of turns!");
 }
 
-document.addEventListener('DOMContentLoaded', function(){
+require(['chronoCanvas'], function(chronoCanvas){
 
   document.getElementById('myButton').addEventListener("click", 
     function(){
@@ -151,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <p>
           <strong>ahead</strong> parameter receive a string with list of keywords, separated by simple spaces. The first keyword is unavoidably "stroke" or "fill". Stroke draw like a border, fill make the circle plain. If you choose "fill" parameter, you will have another parameter, the color. Can be hexadecimal or <a target="_blank" title="HTML color name" href="http://www.html-color-names.com/color-chart.php">HTML color name</a>
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">require(['chronoCanvas'], function(chronoCanvas){
   chronoCanvas({
     canvasTarget: ".chronometer5",
     ahead: "fill red",
@@ -164,10 +105,9 @@ document.addEventListener('DOMContentLoaded', function(){
         <canvas width="150" height="150" class="chronometer6"></canvas>
         <h2>Border/Stroke!</h2>
         <p>
-          If you choose stroke, you will have to add an another parameter, a number, before color, for designating the  
-          thickness of the border.
+          If you choose stroke, you will have to add an another parameter, a number, before color, for designating the border thickness.
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">require(['chronoCanvas'], function(chronoCanvas){
   chronoCanvas({
     canvasTarget: ".chronometer6",
     ahead: "stroke 30 tomato",
@@ -178,11 +118,11 @@ document.addEventListener('DOMContentLoaded', function(){
       </li>
       <li>
         <canvas width="150" height="150" class="chronometer7"></canvas>
-        <h2>Colors!</h2>
+        <h2>Background!</h2>
         <p>
-          <strong>Iteration</strong> parameter give you the abilities to choose how many turn you want to do. It take a number as value. If set to 0, giving infinite loop. In the example bellow, will turn infinitely.
+          In the same way as ahead, there is <strong>behind</strong> parameter, giving you the abilities to skinn the background! And, of course, never forget you can use any svg or pic in css background of a canvas!
         </p>
-<pre><code class="javascript">document.addEventListener('DOMContentLoaded', function(){
+<pre><code class="javascript">require(['chronoCanvas'], function(chronoCanvas){
   chronoCanvas({
     canvasTarget: ".chronometer7",
     behind: "stroke 30 #666",
